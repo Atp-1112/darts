@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts Scoreboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        .scoreboard {
+            background: linear-gradient(145deg, #2e2e45, #232334);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 400px;
+        }
+        .scoreboard h1 {
+            margin: 0 0 20px;
+            font-size: 32px;
+        }
+        .team {
+            margin-bottom: 20px;
+        }
+        .team h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #ffcc00;
+        }
+        .team input[type="text"] {
+            margin-bottom: 10px;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+            width: 80%;
+        }
+        .score {
+            font-size: 48px;
+            margin: 10px 0;
+            font-family: 'Digital-7', sans-serif;
+            color: #00ff00;
+            background: #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 100px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+        .reset {
+            margin-top: 20px;
+            background-color: #dc3545;
+        }
+        .reset:hover {
+            background-color: #a71d2a;
+            transform: scale(1.1);
+        }
+        @font-face {
+            font-family: 'Digital-7';
+            src: url('https://fonts.cdnfonts.com/s/17240/Digital7-2.woff') format('woff');
+        }
+    </style>
+</head>
+<body>
+    <div class="scoreboard">
+        <h1>Darts Scoreboard</h1>
+
+        <div class="team" id="team1">
+            <input type="text" placeholder="Enter Team 1 Name" id="team1Name" oninput="updateTeamName('team1Name', 'team1Header')">
+            <h2 id="team1Header">Team 1</h2>
+            <div class="score" id="score1">0</div>
+            <div class="buttons">
+                <button onclick="addScore(1, 'score1')">+1</button>
+                <button onclick="addScore(5, 'score1')">+5</button>
+                <button onclick="addScore(10, 'score1')">+10</button>
+            </div>
+        </div>
+
+        <div class="team" id="team2">
+            <input type="text" placeholder="Enter Team 2 Name" id="team2Name" oninput="updateTeamName('team2Name', 'team2Header')">
+            <h2 id="team2Header">Team 2</h2>
+            <div class="score" id="score2">0</div>
+            <div class="buttons">
+                <button onclick="addScore(1, 'score2')">+1</button>
+                <button onclick="addScore(5, 'score2')">+5</button>
+                <button onclick="addScore(10, 'score2')">+10</button>
+            </div>
+        </div>
+
+        <button class="reset" onclick="resetScores()">Reset</button>
+    </div>
+
+    <script>
+        function addScore(points, teamId) {
+            const scoreElement = document.getElementById(teamId);
+            let currentScore = parseInt(scoreElement.textContent, 10);
+            currentScore += points;
+            scoreElement.textContent = currentScore;
+        }
+
+        function resetScores() {
+            document.getElementById('score1').textContent = 0;
+            document.getElementById('score2').textContent = 0;
+        }
+
+        function updateTeamName(inputId, headerId) {
+            const inputElement = document.getElementById(inputId);
+            const headerElement = document.getElementById(headerId);
+            headerElement.textContent = inputElement.value || `Team ${inputId.charAt(inputId.length - 1)}`;
+        }
+    </script>
+</body>
+</html>
